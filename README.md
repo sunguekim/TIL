@@ -1,2 +1,2 @@
 # TIL
-This storage store my homework.
+This storage save my homework.
