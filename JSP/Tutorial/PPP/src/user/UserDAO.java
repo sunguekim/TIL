@@ -7,7 +7,7 @@ public class UserDAO {
 	private PreparedStatement pstmt;
 	private ResultSet rs;
 	
-	public void conn() {
+	public UserDAO {
 		try {
 			String dbURL = "jdbc:mysql://localhost:3306/member?serverTimezone=Asia/Seoul&useSSL=false";
 			String dbID  = "root";
