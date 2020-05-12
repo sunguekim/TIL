@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <%- include('../partials/head')%>
+        <!--1-->
+</head>
+
+<body>
+    <%- include('../partials/nav')%>
+        <!--2-->
+        <div class="contact contact-index">
+            <h2>Index</h2>
+            <ul>
+                <% contacts.forEach(function(contact){ %>
+                    <!--3-->
+                    <li>
+                        <a href="/contacts/<%= contact._id%>">
+                            <%= contact.name%>></a>
+                    </li>
+                    <%})%>
+            </ul>
+        </div>
+</body>
+
+</html>
+
+<!-- 1&2 include 를 사용해서 외부 ejs(heag&nav)를 가져오는 옵션 -->
+<!-- 3: ejs를 이용해 forEachans 사용 -->
