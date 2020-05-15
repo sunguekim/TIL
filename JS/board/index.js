@@ -31,7 +31,7 @@ app.use('/', require('./routes/home'));
 
 //Port 세팅
 
-let Port = 3000;
-app.liten(port, function() {
-    console.log("server ON port http://localhost::" + port);
+let port = 3000;
+app.listen(port, function() {
+    console.log("server ON port http://localhost:" + port);
 });
