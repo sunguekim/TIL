@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vue</title>
+    <!-- 예제1번 html에 vue마운트 시키기 -->
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- 아래의 과정은 스크립트와 html태그에 데이터를 전달해주는 데이터바인딩 -->
+
+      <div id="test">
+        <!-- <button v-on:click='num++'>{{num}}</button> -->
+        <!-- v-on==디렉트,지시어 -->
+        <button v-on:Click='f1'>{{num}}</button>
+        <button v-on:Click='f2'>{{num}}</button>
+        <button>{{f3()}}</button>
+      </div>
+   
+
+    <script>
+    //   new Vue({
+    //     el: "#test",
+    //     // data: {
+    //     //   arr: [10, 20, 30],
+    //     //   animal: "horangE",
+    //     // },
+    //     template:"<div><h1><h1>hihi</h1></h1></div>"
+    //   });
+
+    // new Vue({
+    //     el:'#test',
+    //     data:{
+    //         msg:""
+    //     },
+    //     temlplate:"<h1>hihi</h1>"
+    // })
+
+    new Vue({
+        el:'#test',
+        data:{
+            num:0,
+        },
+        methods:{
+            f1:function(){console.log(1)},
+            f2:()=>{console.log(2)},
+            f3:()=>{return 'cat'},
+        },
+    })
+    </script>
+  </body>
+</html>
