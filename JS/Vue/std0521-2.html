@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+
+    <div id="app">
+        <com1></com1>
+        <com2></com2>
+    </div>
+
+    <script>
+
+      Vue.component("com1", {
+        template: "<button @click='f1()'>버튼1</button>",
+        //컴파일 직전에 실행되는 메소드
+        created: function(){
+            // 이벤트 예약어 eventBus.$on() 첫번째인수는 이벤트 이름이다 아래는 eb로 등록을하였고 다른 컴포넌트에서eb를 호출하면 두번째 인수로 선언되어있는 함수를 실행한다
+            //두번째 인수로 람다식을 사용해야만한다 
+            eventBus.$on('eb',(value)=>{console.log(value)})
+            console.log('com1')
+        },
+        data:function(){
+            return {num:100,}
+        },
+        methods:{
+            //.$emit() 예약 이벤트 실행 메소드
+            f1:function(){eventBus.$emit('eb2',this.num)}
+        },
+      });
+
+      Vue.component("com2", {
+        template: "<button @click='f2()'>{{num}}</button>",
+        data:function(){
+            return {num:0,}
+        },
+        created:function(){
+            eventBus.$on('eb2',(num)=>{this.num=num*4})
+            console.log('com2')
+        },
+        methods:{
+            f2:function(){
+                // eventBus.$emit('eb2')
+                this.num=0
+            }
+        },
+      });
+
+      //이벤트 객체생성
+      let eventBus = new Vue();
+      new Vue({
+        el: "#app",
+      });
+    </script>
+  </body>
+</html>

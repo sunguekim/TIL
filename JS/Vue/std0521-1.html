@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- v-on뒤에show는 임의의 이벤트이다 show이벤트가 발생하면 f2를 콜하겠다는뜻 -->
+      <!-- v-on은 @로 치환가능 -->
+      <com1/>
+      <com2/>
+    </div>
+
+    <script>
+      //   Vue.component("tiger",{
+      //       template:`<div>
+      //      <button @click='f1()'>{{count1}}</button>
+      //      <button @click='f3()'>cccc</button>
+      //       </div>`,
+      //       data:function(){
+      //           return {count1:0,count2:0,}
+      //       },
+      //       methods:{
+      //           f1:function(){
+      //               console.log(this.count1)
+      //               this.count1++},
+      //           f2:function(){
+
+      //           }
+      //       },
+      //       computed:{
+      //          f3:function(){console.log(this.count1)}
+      //       }
+
+      //   })
+
+    //   Vue.component("bpp", {
+    //     template: `
+    //     <div>
+    //     <cpp/>
+    //     </div>`,
+    //     props: ["name", "age"],
+    //     methods: {
+    //       bpp: function () {
+    //         console.log("bpp");
+    //       },
+    //     },
+    //   });
+    //   Vue.component("cpp", {
+    //     template: `
+    //     <div>
+    //     <dpp/>
+    //     </div>`,
+    //     props: ["name", "age"],
+    //     methods: {
+    //       cpp: function () {
+    //         console.log("cpp");
+    //       },
+    //     },
+    //   });
+    //   Vue.component("dpp", {
+        // template: `
+        // <div>
+        // <button @click='dpp'>dpp</button>
+        // </div>`,
+    //     props: ["name", "age"],
+    //     methods: {
+    //       dpp: function () {
+    //         console.log("dpp");
+    //       },
+    //     },
+    //   });
+
+    //   new Vue({
+    //     el: "#app",
+    //     data: {
+    //       name: "",
+    //     },
+    //     methods: {
+    //       app: function () {
+    //         console.log("app")
+    //       },
+    //     },
+    //   });
+
+    Vue.component('com1',{
+        template: `
+        <div>
+            <button>버튼1</button>
+        </div>`,
+        created:function(){console.log()},
+    });
+    Vue.component('com2',{
+        template: `
+        <div>
+        <button>버튼2</button>
+        </div>`,
+        created:function(){console.log()},
+    })
+    //이벤트 객체생성
+    let eventBus = new Vue();
+    new Vue({
+        el:"#app",
+        data:{},
+        method:{},
+    })
+    </script>
+  </body>
+</html>

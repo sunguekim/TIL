@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <!-- flag=true or false 를 의미하는 값 -->
+    <!-- v-if boolean 지시어 -->
+    <!-- <h1 v-if='flag'>hoho</h1>
+        <h1 v-if='flag2'>hoho</h1> -->
+    <!-- <ul>
+                v-for 반복지시어
+                <li v-for='xxx in items'>{{xxx}}</li>
+            </ul> -->
+
+    <!-- <div id="app2">
+      <h1>{{msg}}</h1>
+    </div> -->
+    <div id="app1">
+      <tiger></tiger>
+    </div>
+
+    <!-- <script>
+        new Vue({
+          el: "#app2",
+          data: {
+            msg: "1",
+          },
+          method: {},
+        });
+
+      전역컴포넌트는 코드순서에 영향을받는다
+      컴포넌트 메소드에는 두가지 인수가 들어가는데 첫번쨰는 컴포넌트 이름 두번쨰는 객체정의이다
+      Vue.component('lion',{
+          template:'<h1>local</h1>'
+      });
+        Vue.component('lion', {
+          template: "<h1>11</h1>",
+        });
+        new Vue({
+          el: "#app1",
+          data: {
+            msg: "2",
+          },
+          method: {},
+          components: {
+            tiger: { template: "<h1>tiger</h1>" },
+          },
+        });
+        new Vue({
+          el: "#app2",
+        });
+     
+    </script> -->
+
+    <script>
+      //vue 컴포넌트에서는 변수를 설정할떄 함수로 리턴을 받아야한다
+      //v-on: === @ 치환가능
+      Vue.component("tiger", {
+        template: "<button @click='f1()'>{{num}}</button>",
+        data: function () {
+          return {num : 0};
+        },
+        methods: {
+          f1: function() {
+            console.log(1)
+            this.num++
+          },
+        },
+      });
+
+      new Vue({
+        el: "#app1",
+        components: {},
+      });
+    </script>
+  </body>
+</html>

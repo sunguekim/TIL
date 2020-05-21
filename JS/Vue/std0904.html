@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <tiger v-bind:dname=sname v-bind:dage=sage></tiger>
+    </div>
+
+    <script>
+      //전역컴포넌트 생성->버튼 누를때마다 카운트->함수에서 처리
+      //   Vue.component("count", {
+      //     template: "<button @click='f1()'>{{count}}</button>",
+      //     data:function(){
+      //         return {count:0}
+      //     },
+      //     methods:{
+      //         f1:function(){
+      //             this.count++
+      //         }
+      //     }
+      //   });
+      Vue.component("tiger", {
+        template: `<div>
+        <h1>{{dname}},{{dage}}</h1> <br/>
+        <button @click='f1()'>{{age}}</button>
+        </div>`,
+         props: ["dname", "dage"],
+        data:function(){
+            return {
+                name:'hoho',
+                age:20
+            }
+        },
+        methods:{
+            f1:function(){
+                console.log(dn) 
+            }
+        }
+      });
+      new Vue({
+        el: "#app",
+        data: {
+          sname:'dd',
+          sage:0,
+        },
+        methods: {
+          f2: function () {
+            this.num++;
+          },
+        },
+      });
+    </script>
+  </body>
+</html>
