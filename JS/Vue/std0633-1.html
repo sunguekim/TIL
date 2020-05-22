@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <!-- <input placeholder="제한값" v-model="limitage" />
+      <input placeholder="출력 개수" v-model="limitcount" /> -->
+      <ul>
+        <li v-for="item in arr">{{item}}</li>
+      </ul>
+      <ul>
+        <bpp v-for="item in arr" v-bind:age="item.age" v-bind:name="item.name" />
+        <li></li>
+      </ul>
+    </div>
+
+    <script>
+      Vue.component("bpp", {
+        template: `
+        <div>
+            <ul>
+                <li>{{age}},{{name}}</li>
+            </ul>
+        </div>`,
+        props:{name:'',age:0},
+        data() {
+          return {};
+        },
+      });
+
+      Vue.component("sel", {
+        template: `<div>
+                <input  placeholder="제한값" v-model="limitage"/>
+                <input placeholder="출력 개수" v-model="limitcount" />
+                <ul>
+                    <li v-for="item in f2()">{{item}}</li>
+                </ul>
+            </div>`,
+        data: function () {
+          return {
+            info: [],
+            // limitage: 50,
+            // limitcount: 0,
+          };
+        },
+        // <li v-for="(item , index) in f3(info)">{{index}}</li>
+        //f1() 함수 콜하기
+        methods: {
+          f1() {
+            return this.info
+              .filter((v) => v.age > this.limitage)
+              .slice(0, this.limitcount);
+          },
+
+          //   f2() {
+          //     axios
+          //       .get("https://my-json-server.typicode.com/sunguekim/tiger/test")
+          //       .then((res) => {
+          //         this.info = res.data;
+          //         console.log(res);
+          //       })
+          //       .catch(function (err) {
+          //         console.log(err);
+          //       });
+          //     return this.info
+          //       .filter((v) => v.age > this.limitage)
+          //       .slice(0, this.limitcount);
+          //   },
+          //   f1: function (arr) {
+          //     let a = arr.filter(function (val) {
+          //       return 30 <= val.age;
+          //     });
+          //     return a;
+          //   },
+          //   f2: (arr) => {
+          //     let val = arr.filter((value) => {
+          //       return value.age > 30;
+          //     });
+          //     return val;
+          //   },
+          //   f3: (arr) => {
+          //     return arr.filter((value) => value.age > a);
+          //   },
+          //   f5() {
+          //     return this.info.filter((value) => value.age > 30);
+          //   },
+        },
+      });
+
+      //   new Vue({
+      //     el: "#app",
+      //     data: {
+      //       info: [],
+      //       limitage: 50,
+      //       limitcount: 0,
+      //     },
+      //     methods: {
+      //       f2() {
+      //         return this.info
+      //           .filter((v) => v.age > this.limitage)
+      //           .slice(0, this.limitcount);
+      //       },
+      //     },
+      //     created: function () {
+      //       axios
+      //         .get("https://my-json-server.typicode.com/sunguekim/tiger/test")
+      //         .then((res) => {
+      //           this.info = res.data;
+      //           console.log(res);
+      //         })
+      //         .catch(function (err) {
+      //           console.log(err);
+      //         });
+      //     },
+      //   });
+
+      new Vue({
+        el: "#app",
+        data: {
+          arr: [
+            { id: 1, name: "ho", age: 40 },
+            { id: 2, name: "rang", age: 450 },
+            { id: 3, name: "EEEE", age: 450 },
+          ],
+        },
+      });
+    </script>
+  </body>
+</html>

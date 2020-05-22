@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  </head>
+  <body>
+    <div id="app">
+      <tig></tig>
+      <button @click='f1'>get</button>
+      <ul>
+          <li v-for='dat in obj'>{{dat}}</li>
+      </ul>
+    </div>
+
+    <script>
+      Vue.component("tig", {
+        template: "<h1></h1>",
+        data: function () {
+          return { num: 0, list: [] };
+        },
+        //axios는 비동기 처리로 서버에 데이터를 요청할때 사용된다 ajax로 만들어진 메소드
+        
+        created: function () {
+          //created는 변수 초기화 목적으로 많이 사용된다
+          //this.num = props*3 인수로 넘어온 프롭스를 조작할수있다
+        //   let ar = [];
+        //   ar = [
+        //     { a: 10, b: 20 },
+        //     { a: 30, b: 40 },
+        //     { a: 50, b: 60 },
+        //   ];
+
+        //   this.list = ar;
+        //   console.log(this.list);
+        //   this.num = 10;
+        //   this.num = this.num * 3;
+        },
+
+        // mounted: function () {
+        //   this.num = 20;
+        // },
+      });
+
+      new Vue({
+        el: "#app",
+        data:{obj:{},},
+        methods:{
+            f1:function(){
+                axios.get('https://my-json-server.typicode.com/sunguekim/tiger/comments')
+                .then((res)=>{
+                    this.obj=res.data
+                })
+                .catch(function(err){
+                    console.log(err)
+                })
+            }
+        }
+      });
+    </script>
+  </body>
+</html>
