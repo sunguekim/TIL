@@ -1,26 +1,68 @@
-import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import React, { Component } from 'react';
+import { Button } from 'react-bootstrap';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+
+class App extends Component{
+  
+  constructor(props){
+    super();
+    this.state={
+      gender:'',
+      animal:''
+    }
+  }
+
+  onChangeG=(e)=>{
+    this.setState({
+      gender:e.target.value
+    },console.log(e.target.value))
+  }
+  onChangeA=(e)=>{
+    this.setState({
+      animal:e.target.value
+    },console.log(e.target.value))
+    
+  }
+
+   handleClick=()=>{
+    const {gender,animal} = this.state
+    console.log(this.state)
+    fetch('/api',{
+      method:'POST',
+      body:JSON.stringify({
+        gender,
+        animal,
+      }),
+      headers:{
+        'Accept':'application/json',
+        'Content-Type':'applitcation/json'
+      },
+    })
+  }
+  render(){
+    return (
+      <div className="App">
+        <h2>성별선택</h2>
+        <hr />
+        <form>
+          <input type="radio" value="man" name="gender"  onChange={this.onChangeG}/>남자
+           <input type="radio" value="woman" name="gender"  onChange={this.onChangeG} />여자
+        </form>
+        <h2>좋아하는 동물</h2>
+        <hr />
+        <form>
+          <input type="radio"value="tiger" name="animal"  onChange={this.onChangeA}/>호랑이
+           <input type="radio" value="ele" name="animal"  onChange={this.onChangeA} />코끼리
+           <input type="radio"  value="egle" name="animal"  onChange={this.onChangeA} />독수리
+        </form>
+    <p>현재 선택사항:[{this.state.gender},{this.state.animal}]</p>
+        <Button variant="outline-primary" onClick={this.handleClick}>제출하기</Button>
+      </div>
+    );
+  }
 }
 
 export default App;

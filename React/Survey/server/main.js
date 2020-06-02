@@ -2,7 +2,8 @@ var express = require('express');
 var app =express();
 var bodyParser = require('body-parser');
 var mongoose = require('mongoose');
-var api = require('./routes/index');
+var api = require('./routes/survey');
+var cors = require('cors');
 
 var db = mongoose.connection;
 db.on('error',console.error);
@@ -19,8 +20,9 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(bodyParser.json());
-app.use('./api',api);
+app.use('/api',api);
+app.use(cors());
 
 app.listen(port,()=>{
-    console.log('liten 4000 port',port)
+    console.log('listen 4000 port',port)
 })

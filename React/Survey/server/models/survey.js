@@ -1,16 +1,10 @@
 var mongoose  =require('mongoose');
 
-const Schema = mongoose.Schema;
+const {Schema} = mongoose.Schema;
 
 const Survey = new Schema({
-    gender:{
-        Question:String,
-        Answer:String
-    },
-    animal:{
-        Question:String,
-        Answer:String
-    }
+    gender:{type:String},
+    animal:{type:String}
 })
 
 module.exports=mongoose.model('survey',Survey);

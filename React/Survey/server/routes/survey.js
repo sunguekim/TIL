@@ -1,17 +1,21 @@
 var express = require('express');
+var app = express();
 var Survey = require('../models/survey')
-var mongoose = require('mongoose');
+var cors = require('cors')
 
 const router = express.Router();
+app.use(cors());
+
 
 router.post('/',(req,res)=>{
-    let survey = new Survey({
-        Question:req.body.question,
-        Answer:req.body.answer
-    });
-    survey.save(err=>{
-        if(err)throw err;
-        return res.json({success:true});
+    const survey = new Survey({
+        gender:req.body.gender,
+        animal:req.body.animal
+    })
+    survey.save()
+    .then((result)=>{
+        console.log(result);
+        res.status(201).json(result)
     })
 })
 
