@@ -11,15 +11,23 @@ db.once('open',function(){
     console.log('DB connect!')
 });
 
+mongoose.set('useNewUrlParser',true);
+mongoose.set('useFindAndModify',false);
+mongoose.set('useCreateIndex',true);
+mongoose.set('useUnifiedTopology',true);
 mongoose.connect('mongodb+srv://test:9710@cluster0-u2nng.mongodb.net/test?retryWrites=true&w=majority');
+
+
 
 const port = 4000;
 
+app.use(express.static(__dirname+'/src'));
+app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({
     extended:true
 }));
 
-app.use(bodyParser.json());
+;
 app.use('/api',api);
 app.use(cors());
 
