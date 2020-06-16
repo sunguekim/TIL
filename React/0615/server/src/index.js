@@ -1,9 +1,15 @@
-require('dotenv').config();
-const Koa = require('koa');
-const Router = require('koa-router');
-const posts = require('./api/index')
-const mongoose = require('mongoose')
-const bodyparser = require('koa-bodyparser')
+// const Koa = require('koa');
+// const Router = require('koa-router');
+// const posts = require('./api/index')
+// const mongoose = require('mongoose')
+// const bodyparser = require('koa-bodyparser')
+
+import Koa from 'koa';
+import Router from 'koa-router';
+import bodyparser from 'koa-bodyparser';
+import mongoose from 'mongoose'
+
+import api from './api'
 
 const PORT = 4400;
 const MONGO_URI ="mongodb+srv://test:9710@cluster0-u2nng.mongodb.net/test?retryWrites=true&w=majority";
@@ -36,7 +42,7 @@ router.get('/posts',ctx=>{
     
 });
 
-router.use('/api',posts.routes());
+
 
 app.use(router.routes()).use(router.allowedMethods());
 app.use(bodyparser());
