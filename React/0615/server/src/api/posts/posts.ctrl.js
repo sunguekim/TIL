@@ -94,12 +94,13 @@ import posts from '.';
 
 import Post from '../../models/post'
 import mongoose from 'mongoose'
+import Joi from '@hapi/joi'
 
-const {ObjectId} = mongoose.Types
+const { ObjectId } = mongoose.Types
 
-export const  checkObjectId = (ctx,next)=>{
-    const {id} = ctx.params;
-    if(!ObjectId.isValid(id)){
+export const checkObjectId = (ctx, next) => {
+    const { id } = ctx.params;
+    if (!ObjectId.isValid(id)) {
         ctx.status = 400
         return;
     }
@@ -107,6 +108,22 @@ export const  checkObjectId = (ctx,next)=>{
 }
 
 export const write = async ctx => {
+
+    const schema = Joi.object().keys({
+        title: Joi.string().required(),
+        body: Joi.string().required(),
+        tags: Joi.array()
+            .items(Joi.string())
+            .required(),
+    })
+
+    const result = schema.validate(ctx.request.body);
+    if(result.error){
+        ctx.status=400;
+        ctx.body = result.error;
+        return
+    }
+
     const { title, body, tags } = ctx.request.body;
     const post = new Post({
         title,
@@ -123,9 +140,28 @@ export const write = async ctx => {
 };
 
 export const list = async ctx => {
+
+    const page = parseInt(ctx.query.page||'1',10)//쿼리는 문자열일기 때문에 정수로 캐스팅 값이 주어지지 않았다면 1을 기본값으로 사용하겠다고 선언함
+
+    if(page<1){
+        ctx.status=400;
+        return
+    }
+
     try {
-        const posts = await Post.find().exec();
-        ctx.body = posts
+        const posts = await Post.find()
+        .sort({_id:-1})
+        .lean()
+        .skip((page-1)*10)//skip 처음 열개를 제외하고 다음 10개를 불러옴
+        .limit(10)//리스트에 보여줄 목록 제한
+        .exec();//sort({_id:-1}) 아이디를 기준으로 역순정렬
+        const postCount = await Post.countDocuments().exec();
+        ctx.set('Last-Page',Math.ceil(postCount/10));
+        ctx.body = posts.map(post=>({
+            ...post,
+            body:
+            post.body.length<300?post.body:`${post.body.slice(0,300)}...`,
+        }))
     } catch (e) {
         ctx.throw(500, e);
     }
@@ -158,7 +194,21 @@ export const remove = async ctx => {
 };
 
 export const update = async ctx => {
+
     const { id } = ctx.params;
+    const schema = Joi.object().keys({
+        title:Joi.string(),
+        body:Joi.string(),
+        tags:Joi.array().items(Joi.string()),
+    })
+
+    const result = schema.validate(ctx.request.body);
+    if(result.error){
+        ctx.status = 400;
+        ctx.body = result.error;
+        return
+    }
+
     try {
         const post = await Post.findByIdAndUpdate(id, ctx.request.body, { new: true }).exec();
         if (!post) {
