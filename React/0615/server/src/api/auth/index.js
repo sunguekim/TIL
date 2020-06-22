@@ -1,5 +1,6 @@
 import Router from 'koa-router';
 import * as authCtrl from './auth.ctrl';
+import checkLoggedIn from '../../lib/checkLoggedIn'
 
 const auth = new Router();
 
