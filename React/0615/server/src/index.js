@@ -10,6 +10,7 @@ import bodyparser from 'koa-bodyparser';
 import mongoose from 'mongoose'
 
 import api from './api'
+import jwtMiddleware from'./lib/jwtmiddleware'
 
 const PORT = 4400;
 const MONGO_URI ="mongodb+srv://test:9710@cluster0-u2nng.mongodb.net/test?retryWrites=true&w=majority";
@@ -43,7 +44,7 @@ router.get('/posts',ctx=>{
 });
 
 
-
+app.use(jwtMiddleware)
 app.use(router.routes()).use(router.allowedMethods());
 app.use(bodyparser());
 
