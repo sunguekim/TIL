@@ -3,7 +3,7 @@ import User from '../models/post'
 
 const JWT_SECRET = "asdag1231asd123fasda123"
 
-const jwtMiddleware = (ctx, next) => {
+const jwtMiddleware = async(ctx, next) => {
     const token = ctx.cookies.get('access_token');
     if (!token) return next();
     try {
