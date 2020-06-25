@@ -1,6 +1,5 @@
 // let postId = 1;
 
-import posts from '.';
 
 // const posts =[
 //     {
@@ -98,7 +97,7 @@ import Joi from '@hapi/joi'
 
 const { ObjectId } = mongoose.Types
 
-export const getPostById = (ctx, next) => {
+export const getPostById = async(ctx, next) => {
     const { id } = ctx.params;
     if (!ObjectId.isValid(id)) {
         ctx.status = 400
@@ -248,4 +247,3 @@ export const checkOwnPost = (ctx,next)=>{
     return next();
 }
 
-export default posts;

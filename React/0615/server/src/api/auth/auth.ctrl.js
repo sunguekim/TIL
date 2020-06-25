@@ -29,6 +29,7 @@ export const register = async ctx => {
         });
         await user.setPassword(password);
         await user.save();
+
         const data = user.toJSON();
         delete data.hashedPassword;
         ctx.body = user.serialize();
