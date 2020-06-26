@@ -118,7 +118,7 @@ export const getPostById = async(ctx, next) => {
 }
 
 export const write = async ctx => {
-
+    
     const schema = Joi.object().keys({
         title: Joi.string().required(),
         body: Joi.string().required(),
@@ -151,7 +151,7 @@ export const write = async ctx => {
 };
 
 export const list = async ctx => {
-
+    console.log(ctx)
     const page = parseInt(ctx.query.page||'1',10)//쿼리는 문자열일기 때문에 정수로 캐스팅 값이 주어지지 않았다면 1을 기본값으로 사용하겠다고 선언함
 
     if(page<1){
