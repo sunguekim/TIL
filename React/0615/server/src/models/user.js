@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 const JWT_SECRET = "asdag1231asd123fasda123"
 
 const UserSchema = new Schema({
-    usernmae:{type:String,required:true},
+    username:{type:String,required:true},
     hashedPassword:{type:String,required:true}
 });
 
@@ -19,12 +19,12 @@ UserSchema.methods.checkPassword = async function (password) {
     return result;
 }
 
-UserSchema.statics.findUsername=function (usernmae) {
-    return this.findOne({usernmae});
+UserSchema.statics.findByUsername=function (username) {
+    return this.findOne({username});
 }
 
 UserSchema.methods.serialize=function () {
-    const data  = this.toJson();
+    const data  = JSON.stringify();
     delete data.hashedPassword;
     return data;
 }

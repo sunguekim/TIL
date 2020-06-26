@@ -27,11 +27,11 @@ mongoose.connect(MONGO_URI,{useNewUrlParser:true,useFindAndModify:false})
 const app = new Koa();
 const router = new Router();
 
+app.use(bodyparser());//bodyparser는 항상 라우터 전에 선언해야한다
 router.use('/api',api.routes())
 
 app.use(jwtMiddleware)
 app.use(router.routes()).use(router.allowedMethods());
-app.use(bodyparser());
 
 
 app.listen(PORT,()=>{

@@ -2,6 +2,8 @@ import Joi from '@hapi/joi';
 import User from '../../models/user';
 
 export const register = async ctx => {
+    
+    
     const schema = Joi.object().keys({
         username: Joi.string()
             .alphanum()//특스문자 필터링
@@ -10,7 +12,7 @@ export const register = async ctx => {
             .required(),
         password: Joi.string().required(),
     })
-
+    
     const result = schema.validate(ctx.request.body);
     if (result.error) {
         ctx.status = 400;
@@ -19,7 +21,7 @@ export const register = async ctx => {
     }
     const { username, password } = ctx.request.body;
     try {
-        const exist = await User.findbyUsername(username)
+        const exist = await User.findByUsername(username);
         if (exist) {
             ctx.status = 409;
             return
