@@ -2,14 +2,17 @@ import React,{useEffect} from 'react';
 import {useDispatch,useSelector} from 'react-redux';
 import {changeField,initializeForm,register} from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm'
+import {check} from '../../modules/user';
+import {withRouter} from 'react-router-dom'
 
 
-const RegisterForm=()=>{
+const RegisterForm=({history})=>{
     const dispatch = useDispatch();
-    const {form,auth,authError} = useSelector(({auth})=>({
+    const {form,auth,authError,user} = useSelector(({auth,user})=>({
         form:auth.register,
         auth:auth.auth,
-        authError:auth.authError
+        authError:auth.authError,
+        user:user.user,
     }));
     //인풋 변경이벤트
     const onChange = e=>{
@@ -47,8 +50,23 @@ const RegisterForm=()=>{
         if(auth){
             console.log('회원가입성공');;
             console.log(auth);;
+            dispatch(check());
         }
-    },[auth,authError])
+    },[auth,authError,dispatch]);
+
+    useEffect(()=>{
+        if(user){
+            console.log('checkAPI성공')
+            console.log(user)
+        }
+    },[user])
+
+    useEffect(()=>{
+        console.log(user)
+        if(user){
+            history.push('/')
+        }
+    },[history,user])
 
     return(
         <div>
@@ -62,4 +80,4 @@ const RegisterForm=()=>{
     )
 }
 
-export default RegisterForm;
+export default withRouter(RegisterForm);

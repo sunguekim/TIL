@@ -21,6 +21,7 @@ export const register = async ctx => {
     }
     const { username, password } = ctx.request.body;
     try {
+        
         const exist = await User.findByUsername(username);
         if (exist) {
             ctx.status = 409;
@@ -49,13 +50,13 @@ export const register = async ctx => {
 
 export const login = async ctx => {
     const { username, password } = ctx.request.body;
-
+    console.log(ctx.request.body)
     if (!username || !password) {
         ctx.status = 401;
         return
     }
     try {
-        const user = await User.findbyUsername(username);
+        const user = await User.findByUsername(username)
         if (!user) {
             ctx.status = 401;
             return
@@ -79,6 +80,7 @@ export const login = async ctx => {
 
 export const check = async ctx=>{
     const {user} = ctx.state;
+    console.log(ctx.state)
     if(!user){
         ctx.status = 401;
         return
