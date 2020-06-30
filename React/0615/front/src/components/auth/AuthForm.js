@@ -12,6 +12,13 @@ const AuthFormBlock = styled.div`
     }
 `;
 
+const ErrorMsg = styled.div`
+    color:red;
+    text-align:center;
+    font-size:0.875rem;
+    margin-top:1rem;
+`
+
 const StyledInput = styled.input`
     font-size:1rem;
     border:none;
@@ -49,7 +56,7 @@ const textMap={
     register:'회원가입',
 }
 
-const AuthForm = ({type,form,onChange,onSubmit}) => {
+const AuthForm = ({type,form,onChange,onSubmit,error}) => {
     const text = textMap[type]
     return (
         <div>
@@ -81,6 +88,7 @@ const AuthForm = ({type,form,onChange,onSubmit}) => {
                             value={form.passwordConfirm}
                         />
                     )}
+                    {error&&<ErrorMsg>{error}</ErrorMsg>}
                     <BWMT cyan fullWidth>
                         {text}
                     </BWMT>
