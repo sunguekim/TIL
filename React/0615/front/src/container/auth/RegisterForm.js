@@ -12,7 +12,7 @@ const RegisterForm=({history})=>{
         form:auth.register,
         auth:auth.auth,
         authError:auth.authError,
-        user:user.user,
+        user:user.user
     }));
     //인풋 변경이벤트
     const onChange = e=>{
@@ -40,18 +40,17 @@ const RegisterForm=({history})=>{
     },[dispatch]);
 
     useEffect(()=>{
-        if(authError){
-            console.log('오류발생');
-            console.log(authError);
-            return
-        }else{
-            console.log('authE')
-        }
         if(auth){
             console.log('회원가입성공');;
             console.log(auth);;
             dispatch(check());
         }
+        if(authError){
+            console.log('오류발생');
+            console.log(authError);
+            return
+        }
+        
     },[auth,authError,dispatch]);
 
     useEffect(()=>{
@@ -62,10 +61,10 @@ const RegisterForm=({history})=>{
     },[user])
 
     useEffect(()=>{
-        console.log(user)
         if(user){
             history.push('/')
         }
+
     },[history,user])
 
     return(

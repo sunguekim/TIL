@@ -2,8 +2,7 @@ import Joi from '@hapi/joi';
 import User from '../../models/user';
 
 export const register = async ctx => {
-    
-    
+    console.log('register call')
     const schema = Joi.object().keys({
         username: Joi.string()
             .alphanum()//특스문자 필터링
@@ -32,17 +31,14 @@ export const register = async ctx => {
         });
         await user.setPassword(password);
         await user.save();
-
-        const data = user.toJSON();
-        delete data.hashedPassword;
+        
         ctx.body = user.serialize();
-
+        console.log(user.serialize)
         const token = user.generateToken();
         ctx.cookies.set('access_token', token, {
             maxAge: 100 * 60 * 60 * 24 * 7,//7일
             httpOnly: true,
         });
-
     } catch (e) {
         ctx.throw(500, e)
     }
@@ -80,7 +76,7 @@ export const login = async ctx => {
 
 export const check = async ctx=>{
     const {user} = ctx.state;
-    console.log(ctx.state)
+    console.log(user)
     if(!user){
         ctx.status = 401;
         return
