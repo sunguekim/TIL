@@ -31,11 +31,13 @@ UserSchema.statics.findByUsername = function (username) {
 
 UserSchema.methods.serialize = function () {
     const data = this.toJSON();
+    console.log(data)
     delete data.hashedPassword;
     return data;
 }
 
 UserSchema.methods.generateToken = function () {
+    console.log('token call')
     const token = jwt.sign(
         {
             _id: this.id,

@@ -5,7 +5,7 @@ import {changeField,initializeForm,login} from '../../modules/auth';
 import AuthForm from '../../components/auth/AuthForm'
 import {check} from '../../modules/user'
 
-const LoginForm=(history)=>{
+const LoginForm=({history})=>{
     const dispatch = useDispatch();
     const {form,auth,authError,user} = useSelector(({auth,user})=>({
         form:auth.login,
@@ -48,7 +48,6 @@ const LoginForm=(history)=>{
     },[auth,authError,dispatch]);
 
     useEffect(()=>{
-        console.log(user)
         if(user){
             console.log(user)
             history.push('/')
