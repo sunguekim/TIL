@@ -21,9 +21,7 @@ UserSchema.methods.checkPassword = async function (password) {
     return result;
 }
 
-// UserSchema.statics.findByUsername=function (username) {
-//     return this.findOne({username});
-// }
+
 
 UserSchema.statics.findByUsername = function (username) {
     return this.findOne({username})
@@ -31,8 +29,8 @@ UserSchema.statics.findByUsername = function (username) {
 
 UserSchema.methods.serialize = function () {
     const data = this.toJSON();
-    console.log(data)
     delete data.hashedPassword;
+    console.log(data)
     return data;
 }
 

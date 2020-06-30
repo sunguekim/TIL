@@ -9,7 +9,7 @@ const jwtMiddleware = async(ctx, next) => {
     if (!token) return next();
     try {
         const decoded = jwt.verify(token,"asdag1231asd123fasda123");
-        console.log('cline-neutral')
+        console.log(decoded)
         ctx.state.user={
             _id:decoded._id,
             username:decoded.username,

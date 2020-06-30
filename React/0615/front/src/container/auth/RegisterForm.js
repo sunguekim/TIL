@@ -40,16 +40,17 @@ const RegisterForm=({history})=>{
     },[dispatch]);
 
     useEffect(()=>{
-        if(authError){
-            console.log('오류발생');
-            console.log(authError);
-            return
-        }
         if(auth){
             console.log('회원가입성공');;
             console.log(auth);;
             dispatch(check());
         }
+        if(authError){
+            console.log('오류발생');
+            console.log(authError);
+            return
+        }
+        
     },[auth,authError,dispatch]);
 
     useEffect(()=>{
