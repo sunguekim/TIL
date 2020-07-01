@@ -33,7 +33,6 @@ export const register = async ctx => {
         await user.save();
         
         ctx.body = user.serialize();
-        console.log(user.serialize)
         const token = user.generateToken();
         ctx.cookies.set('access_token', token, {
             maxAge: 100 * 60 * 60 * 24 * 7,//7일
@@ -46,7 +45,6 @@ export const register = async ctx => {
 
 export const login = async ctx => {
     const { username, password } = ctx.request.body;
-    console.log(ctx.request.body)
     if (!username || !password) {
         ctx.status = 401;
         return
@@ -76,7 +74,6 @@ export const login = async ctx => {
 
 export const check = async ctx=>{
     const {user} = ctx.state;
-    console.log(user)
     if(!user){
         ctx.status = 401;
         return
