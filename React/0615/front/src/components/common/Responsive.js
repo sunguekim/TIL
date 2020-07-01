@@ -15,11 +15,7 @@ const ResponsiveBlock = styled.div`
 `;
 
 const Responsive = ({children,...rest})=>{
-    return(
-        <div>
-            <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>
-        </div>
-    )
+    return <ResponsiveBlock {...rest}>{children}</ResponsiveBlock>
 }
 
 export default Responsive;

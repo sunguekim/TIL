@@ -95,10 +95,12 @@ import Post from '../../models/post'
 import mongoose from 'mongoose'
 import Joi from '@hapi/joi'
 
+
 const { ObjectId } = mongoose.Types
 
 export const getPostById = async(ctx, next) => {
     const { id } = ctx.params;
+    console.log('call')
     if (!ObjectId.isValid(id)) {
         ctx.status = 400
         return;
@@ -151,7 +153,7 @@ export const write = async ctx => {
 };
 
 export const list = async ctx => {
-    console.log(ctx)
+    
     const page = parseInt(ctx.query.page||'1',10)//쿼리는 문자열일기 때문에 정수로 캐스팅 값이 주어지지 않았다면 1을 기본값으로 사용하겠다고 선언함
 
     if(page<1){

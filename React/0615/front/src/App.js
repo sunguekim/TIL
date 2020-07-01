@@ -1,9 +1,8 @@
 import React from 'react';
-import {Router, Route} from 'react-router-dom';
+import {Route} from 'react-router-dom';
 import PostPage from './pages/PostPage';
 import PostListPage from './pages/PostListPage';
 import LoginPage from './pages/LoginPage';
-import Register from './pages/Register';
 import WritePage from './pages/WriterPage'
 import RegisterPage from './pages/Register';
 

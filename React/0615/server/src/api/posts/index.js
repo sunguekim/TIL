@@ -7,7 +7,7 @@ const posts = new Router();
 
 
 posts.get('/',postCtrl.list);
-posts.post('/',checkLoggedIn,postCtrl.checkOwnPost,postCtrl.write);
+posts.post('/',checkLoggedIn,postCtrl.write);
 
 const post =  new Router()
 post.get('/',postCtrl.read);
