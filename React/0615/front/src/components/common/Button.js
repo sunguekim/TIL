@@ -32,6 +32,11 @@ const StyledButton = styled.button`
                 &:hover{
                     background:${palette.cyan[4]};
                 }
+                &:diabled{
+                    background:${palette.gray[3]};
+                    color:${palette.gray[5]};
+                    cursor: not-allowed;
+                }
             `
         }
 `;

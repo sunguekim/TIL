@@ -13,8 +13,8 @@ import api from './api'
 import jwtMiddleware from'./lib/jwtmiddleware'
 
 // const PORT = 4000;
-const {PORT} = process.env
-const MONGO_URI ="mongodb+srv://test:9710@cluster0-u2nng.mongodb.net/test?retryWrites=true&w=majority";
+const {PORT,MONGO_URI} = process.env
+
 
 mongoose.connect(MONGO_URI,{useNewUrlParser:true,useFindAndModify:false})
 .then(()=>{
