@@ -2,19 +2,23 @@ import React,{useEffect} from 'react';
 import WriteActionButtons from '../../components/write/WriteActionButtons';
 import {useSelector,useDispatch} from 'react-redux'
 import {withRouter} from 'react-router-dom'
-import {writePost} from '../../modules/write'
+import {writePost,updatePost} from '../../modules/write'
 
 const WriteActionButtonsContainer =({history})=>{
     const dispatch = useDispatch();
-    const {title,body,tags,post,postError}=useSelector(({write})=>({
+    const {title,body,tags,post,postError,orginalPostId}=useSelector(({write})=>({
         title:write.title,
         body:write.body,
         tags:write.tags,
         post:write.post,
         postError:write.postError,
+        orginalPostId:write.orginalPostId,
     }));
 
     const onPublish=()=>{
+        if(orginalPostId){
+            dispatch(updatePost({title,body,tags,id:orginalPostId}))
+        }
         dispatch(
             writePost({
                 title,
@@ -38,7 +42,7 @@ const WriteActionButtonsContainer =({history})=>{
         }
     },[history,post,postError]);
     
-    return <WriteActionButtons onPublish={onPublish} onCancle={onCancle} />;
+    return <WriteActionButtons onPublish={onPublish} onCancle={onCancle} isEdit={!orginalPostId} />;
 }
 
 export default withRouter(WriteActionButtonsContainer);

@@ -25,8 +25,7 @@ const ActionButton =styled.button`
         margin-left:0.25rem;
     }
 `
-if(a>b)return a;
-if(a<b)return b;
+
 
 const PostActionButtons =({onEdit})=>{
     return(

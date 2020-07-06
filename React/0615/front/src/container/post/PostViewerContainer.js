@@ -31,6 +31,7 @@ const PostViewerContainer = ({ match,history }) => {
     const ownPost = (user&&user._id)===(post&&post.user._id);
     return (
         <PostViewer
+            postId = {postId}
             post={post}
             loading={loading}
             error={error}

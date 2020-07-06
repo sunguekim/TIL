@@ -92,9 +92,11 @@
 //  }
 
 import Post from '../../models/post'
+import Comment  from '../../models/comment'
 import mongoose from 'mongoose'
 import Joi from '@hapi/joi'
 import sanitizeHtml from 'sanitize-html'
+
 
 const { ObjectId } = mongoose.Types
 
@@ -125,6 +127,7 @@ const sanitizeOption = {
 
 export const getPostById = async(ctx, next) => {
     const { id } = ctx.params;
+    const postId = id;
     console.log('call')
     if (!ObjectId.isValid(id)) {
         ctx.status = 400
@@ -132,11 +135,12 @@ export const getPostById = async(ctx, next) => {
     }
     try {
         const post = await Post.findById(id);
+        const comment = await Comment.findById(postId);
         if(!post){
             ctx.status = 404;
             return;
         }
-        ctx.state.post = post;
+        ctx.state.post = post,comment;
         return next();
     } catch (e) {
         ctx.throw(500,e)
