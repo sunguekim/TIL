@@ -26,6 +26,7 @@ const ActionButton =styled.button`
     }
 `
 
+
 const PostActionButtons =({onEdit})=>{
     return(
         <PostActionButtonsBlock>

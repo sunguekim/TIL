@@ -4,6 +4,7 @@ import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags'
+import Comment from './Comment'
 
 const PostViewerBlock = styled(Responsive)`
     margin-top:4rem;
@@ -47,9 +48,10 @@ const PostHead = styled.div`
 const PostContent = styled.div`
     font-size:1.3125rem;
     color:${palette.gray[8]};
+    border-bottom: 1px solid ${palette.gray[7]};
 `
 
-const PostViewer = ({ post, error, loading,actionButtons }) => {
+const PostViewer = ({ post, error, loading, actionButtons, postId }) => {
     if (error) {
         if (error.response && error.response.status === 404) {
             return <PostViewerBlock>존재하지 않는 포스트입니다.</PostViewerBlock>;
@@ -65,13 +67,15 @@ const PostViewer = ({ post, error, loading,actionButtons }) => {
         <PostViewerBlock>
             <PostHead>
                 <h1>{title}</h1>
+                
                 <SubInfo username={user.username} publishedDate={publishedDate} hashMarginTop />
-                <Tags 
+                <Tags
                     tags={tags}
                 />
             </PostHead>
             {actionButtons}
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
+            <Comment postId={postId} />
         </PostViewerBlock>
     );
 };
