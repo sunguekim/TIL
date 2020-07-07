@@ -9,16 +9,23 @@ const [
     WRITE_COMMENT_FAILURE,
 ]=createRequestActionTypes('comment/WRITE_COMMENT');
 
-export const writeComment = createAction(WRITE_COMMENT);
+
+
+export const writeComment = createAction(WRITE_COMMENT,({postId,text})=>({
+    postId,text
+}));
+
 
 const wirteCommentSaga =createRequestSaga(WRITE_COMMENT,commentAPI.writeCommnet);
 
+
 export function* commentSaga(){
     yield takeLatest(WRITE_COMMENT,wirteCommentSaga)
+    
 }
 
 const intitialState={
-    text:null,
+    comment:null,
     postError:null
 }
 

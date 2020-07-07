@@ -127,7 +127,6 @@ const sanitizeOption = {
 
 export const getPostById = async(ctx, next) => {
     const { id } = ctx.params;
-    const postId = id;
     console.log('call')
     if (!ObjectId.isValid(id)) {
         ctx.status = 400
@@ -135,12 +134,28 @@ export const getPostById = async(ctx, next) => {
     }
     try {
         const post = await Post.findById(id);
-        const comment = await Comment.findById(postId);
+
         if(!post){
             ctx.status = 404;
             return;
         }
-        ctx.state.post = post,comment;
+        ctx.state.post = post;
+        // ctx.state.comment = comment;
+
+        return next();
+    } catch (e) {
+        ctx.throw(500,e)
+    }
+    return next();
+}
+
+export const getComment=async(ctx,next)=>{
+    const {id}=ctx.params;
+    console.log(id)
+
+    try {
+        const comment = await Comment.find({postId:id});
+        ctx.state.comment = comment
         return next();
     } catch (e) {
         ctx.throw(500,e)

@@ -4,8 +4,8 @@ import mongoose from 'mongoose';
 const {Schema} = mongoose;
 
 const commentSchema = new Schema({
-    postId:{type:mongoose.Schema.Types.ObjectId,ref:'post',required:true},
-    user:{type:mongoose.Schema.Types.ObjectId,ref:'user', required:true},
+    postId:{type:mongoose.Schema.Types.ObjectId,required:true},
+    username:{type:String, required:true},
     parentComment:{type:mongoose.Schema.Types.ObjectId,ref:'comment'},
     text:{type:String,required:[true,'text is required']},
     isDeleted:{type:Boolean},

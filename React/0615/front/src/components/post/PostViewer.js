@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import styled from 'styled-components';
 import palette from '../../lib/styles/palette';
 import Responsive from '../common/Responsive';
 import SubInfo from '../common/SubInfo';
 import Tags from '../common/Tags'
 import Comment from './Comment'
+
 
 const PostViewerBlock = styled(Responsive)`
     margin-top:4rem;
@@ -51,7 +52,10 @@ const PostContent = styled.div`
     border-bottom: 1px solid ${palette.gray[7]};
 `
 
-const PostViewer = ({ post, error, loading, actionButtons, postId }) => {
+
+
+const PostViewer = ({ post, error, loading, actionButtons, postId, comment }) => {
+
     if (error) {
         if (error.response && error.response.status === 404) {
             return <PostViewerBlock>존재하지 않는 포스트입니다.</PostViewerBlock>;
@@ -63,11 +67,13 @@ const PostViewer = ({ post, error, loading, actionButtons, postId }) => {
     }
 
     const { title, body, user, publishedDate, tags } = post;
+    const { text, username } = comment
+
     return (
         <PostViewerBlock>
             <PostHead>
                 <h1>{title}</h1>
-                
+
                 <SubInfo username={user.username} publishedDate={publishedDate} hashMarginTop />
                 <Tags
                     tags={tags}
@@ -76,6 +82,16 @@ const PostViewer = ({ post, error, loading, actionButtons, postId }) => {
             {actionButtons}
             <PostContent dangerouslySetInnerHTML={{ __html: body }} />
             <Comment postId={postId} />
+            {!loading && comment && (
+                <div>
+                    {comment.map(item => (
+                        <div>
+                            <div key={item._id}>{item.text}</div>
+                            
+                        </div>
+                    ))}
+                </div>
+            )}
         </PostViewerBlock>
     );
 };
