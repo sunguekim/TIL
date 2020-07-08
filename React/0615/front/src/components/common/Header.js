@@ -46,10 +46,13 @@ const Header = ({ user,onLogout }) => {
                     <Link to="/" className="logo">
                         REACTERS
                     </Link>
+         
                     {user ?
                         (
                             <div className="right">
+                                <Link to="/UserInfo">
                                 <UserInfo>{user.username}</UserInfo>
+                                </Link>
                                 <Button onClick={onLogout}>로그아웃</Button>
                             </div>
                         ) : (
@@ -57,6 +60,7 @@ const Header = ({ user,onLogout }) => {
                                 <Button to="/login">로그인</Button>
                             </div>
                         )}
+                    
 
                 </Wrapper>
             </HeaderBlock >
