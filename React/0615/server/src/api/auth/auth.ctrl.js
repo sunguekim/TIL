@@ -85,3 +85,16 @@ export const logout = async ctx=>{
     ctx.cookies.set('access_token');
     ctx.status = 204;
 }
+
+export const list = async ctx=>{
+    try {
+        const user = await User.find().sort()
+        ctx.body = user
+    } catch (e) {
+        ctx.throw(500,e)
+    }
+}
+
+export const update = async ctx=>{
+    
+}

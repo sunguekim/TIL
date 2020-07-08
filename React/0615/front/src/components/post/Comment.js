@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react';
 import styled from 'styled-components';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import Button from '../common/Button';
 import Resposive from '../common/Responsive'
 import palette from '../../lib/styles/palette'
