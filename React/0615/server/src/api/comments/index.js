@@ -6,5 +6,8 @@ const comment  = new Router;
 
 
 comment.post('/write',checkLoggedIn,commentCtrl.write);
+comment.get('/',commentCtrl.check)
+
+comment.use('/:id',commentCtrl.getCommentById,comment.routes())
 
 export default comment;

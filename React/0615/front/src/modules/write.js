@@ -2,7 +2,7 @@ import { createAction, handleActions } from 'redux-actions'
 import createRequestSaga, { createRequestActionTypes } from '../lib/createRequestSaga'
 import * as postsAPI from '../lib/api/posts'
 import { takeLatest } from 'redux-saga/effects'
-import post from './post';
+
 
 
 const INITIALIZE = 'write/INITIALIZE';
@@ -26,7 +26,7 @@ export const changeField = createAction(CHANGE_FIELD, ({ key, value }) => ({
     key,
     value,
 }));
-export const writePost = createAction(WRITE_POST, ({ title, body, tags }) => (console.log({ title, body, tags }), {
+export const writePost = createAction(WRITE_POST, ({ title, body, tags }) => ({
     title,
     body,
     tags,
