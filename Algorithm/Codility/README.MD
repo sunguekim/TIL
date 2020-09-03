@@ -1,1 +1,1 @@
-LESSON2.Array
+Codility Lesson Study
