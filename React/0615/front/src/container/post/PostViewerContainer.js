@@ -33,6 +33,8 @@ const PostViewerContainer = ({ match,history }) => {
         history.push('/write')
     }
     
+    const ownPost =(user && user._id)===(post&&post.user._id);
+
     return (
         <PostViewer
             postId = {postId}
@@ -40,7 +42,7 @@ const PostViewerContainer = ({ match,history }) => {
             loading={loading}
             error={error}
             comment={comment}
-            actionButtons={<PostActionButtons onEdit={onEdit}/>}
+            actionButtons={ownPost &&<PostActionButtons onEdit={onEdit}/>}
         />)
 };
 

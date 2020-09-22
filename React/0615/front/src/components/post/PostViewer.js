@@ -10,6 +10,11 @@ import Comment from './Comment'
 const PostViewerBlock = styled(Responsive)`
     margin-top:4rem;
 `
+const CommentBlock = styled.div`
+border-bottom: 1px solid ${palette.gray[4]};
+margin-top:3rem
+`
+
 const PostHead = styled.div`
     border-bottom: 1px solid ${palette.gray[2]};
     padding-bottom: 3rem;
@@ -52,7 +57,17 @@ const PostContent = styled.div`
     border-bottom: 1px solid ${palette.gray[7]};
 `
 
+const CommentViewer = ({ item }) => {
+    return (
+        <CommentBlock>
+            <div key={item._id}>
+                <h2>User:{item.username}</h2>
+                <h3>Comment:{item.text}</h3>
+            </div>
+        </CommentBlock>
 
+    )
+}
 
 const PostViewer = ({ post, error, loading, actionButtons, postId, comment }) => {
 
@@ -85,10 +100,7 @@ const PostViewer = ({ post, error, loading, actionButtons, postId, comment }) =>
             {!loading && comment && (
                 <div>
                     {comment.map(item => (
-                        <div>
-                            <div key={item._id}>{item.text}</div>
-                            
-                        </div>
+                        <CommentViewer key={item._id} item={item} />
                     ))}
                 </div>
             )}
